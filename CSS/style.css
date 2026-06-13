@@ -1,0 +1,813 @@
+/*
+
+filename: group project part 1 styling sheet
+
+author: Nyan Phyo Aung
+
+created: 13.4.2026
+
+last modified: 26.4.2026
+
+description: styling for all 4 pages of group project
+
+*/
+
+/* We used descendant selector style to be more readable and easy to recognize the content of html */
+
+
+/* Choosen theme colors and text color*/
+:root {
+  --color-primary: darkblue;
+  --color-theme: cyan;
+  --color-bg: rgb(15, 25, 23);
+  --color-text: white;
+}
+*{
+  margin: 0;
+  padding: 0;
+  color: var(--color-text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+ /* Prevents the whole page from shaking/scrolling sideways */
+html, body {
+  width: 100%;
+}
+
+ /* Ensures width: 100% actually means 100% */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+body{
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+/* navigation for all pages bar start here*/
+/* logo and company name left side of navigation bar */
+nav{
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 99;
+}
+nav .logo{
+  flex: 4;
+  display: flex;
+  align-items: center;
+  padding-left: 1em;
+}
+nav .logo img{
+  width: 2em;
+}
+nav .logo .title{
+  font-size: 1.3em;
+  font-weight: 500;
+  color: var(--color-theme);
+  font-family: Satisfy, Arial, Helvetica, sans-serif;
+}
+
+/* menu part right side of navigation bar */
+nav .menu{
+  flex: 6;
+  display: flex;
+}
+
+/* use raido to mark the immediate data and label as a click */
+nav .menu input{
+  visibility: hidden;
+  display: none;
+}
+nav .menu label a,i{
+  color: var(--color-theme);
+  font-size: 0.9em;
+}
+nav .menu label a{
+  text-decoration: none;
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 6px;
+  padding-top: 3px;
+}
+nav .menu .buttons{
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+/* border buttom serve as indicator on which page you are in */
+nav .menu .buttons label{
+  margin: 6px;
+  flex: 2.5;
+  text-align: center;
+  opacity: 0.6;
+  transition: border-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* cyan light hover effect for menu buttons */
+nav .menu .buttons label:hover{
+  opacity: 1;
+  filter: drop-shadow(0 0 10px rgb(52, 195, 223)) drop-shadow(0 0 20px rgb(52, 195, 223));
+}
+
+/* implementaion radio input as short term memory */
+nav .menu .buttons label.active
+{
+  border-bottom: 2px solid rgb(232, 232, 63);
+  opacity: 1;
+}
+
+/* navigation bar for all page end here*/
+
+/* main flex to fill the page to push footer to the bottom*/
+main{
+  flex: 1;
+}
+/* footer for all pages start */
+footer {
+  margin-top: 1em;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(20, 35, 40, 0.9);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* github, jira and email icons with links on left */
+footer .socials {
+  flex: 3;
+  padding: 0.2em;
+  padding-bottom: 0;
+  padding-left: 1.5em;
+}
+
+/* right side credits */
+footer .credits {
+  flex: 7;
+  color: rgb(218, 218, 218);
+  font-family: cursive;
+  margin: 0;
+  text-align: right;
+  padding-right: 1.5em;
+  font-size: 0.9em;
+}
+
+footer .socials img {
+  width: 25px;
+  border: 2px solid rgb(164, 164, 164);
+  border-radius: 7px;
+  padding: 2px;
+  margin-left: 0.2em;
+}
+/* footer for all page end here*/
+
+/* banner of home page start here*/
+.banner {
+  min-height: 65vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ablosute positioned banner to serves as video background z-index -1 */
+.banner .banner-bg{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  opacity: 0.3;
+  z-index: -1;
+}
+.banner .text{
+  z-index: 1;
+  color: var(--color-text);
+  text-align: center;
+}
+.banner .text h2{
+  font-size: 3em;
+  margin-bottom: 0.5em;
+  color: rgb(208, 208, 208);
+  -webkit-text-stroke: 1px var(--color-theme);
+}
+.banner .text .tagline{
+  font-family: fantasy;
+  color: rgb(171, 171, 171);
+  font-size: 1.2em;
+}
+.banner .text .description{
+  color: rgba(255, 255, 255, 0.889);
+  width: 50%;
+  transform: translate(50%);
+}
+
+/* all button use same design and hover effect*/
+.btn{
+  color: rgb(49, 49, 49);
+  text-decoration: none;
+  background-color: rgba(62, 237, 237, 0.8);
+  padding: 0.1em 0.7em;
+  display: inline-block;
+  margin-top: 1.3em;
+  border: 1px solid rgb(195, 195, 195);
+  border-radius: 1em;
+}
+.btn:hover{
+  background-color: rgba(62, 237, 237);
+  border: 1px solid rgb(221, 221, 221)
+}
+/* banner of home page end here*/
+
+/* info cards of home page start here */
+/* wrapper so that i can group and center the boxes without effecting main tag */
+.info-wrapper{
+  display: flex;
+  justify-content: center;
+  margin-top: 3em;
+}
+
+/* grid display is used for variety */
+.info{
+  display: grid;
+  width: min(1200px, 85%);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  padding: 2em;
+}
+.info .card{
+  border: 1px solid var(--color-theme);
+  border-radius: 1em;
+  padding: 1em;
+}
+.info .card img{
+  width: 4em;
+}
+.info .card h3{
+  margin-top: 1em;
+  margin-bottom: 0.6em;
+  color: rgb(225, 225, 67);
+}
+.info .card p{
+  font-size: 0.9em;
+  color: rgb(172, 172, 172);
+}
+
+/* Jobs page styling start here */
+.jobs{
+  margin-top: 1em;
+  display: flex;
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+/* sidebar left side of job page start here */
+/* same radio system to serve as short term memory */
+.jobs input{
+  display: none;
+  visibility: hidden;
+}
+.jobs .sidebar{
+  float: left;
+  flex: 4;
+  margin-left: 0.5em;
+}
+.jobs .sidebar h2{
+  font-size: 1.8em;
+  margin-bottom: 0.8em;
+  text-align: center;
+  -webkit-text-stroke: 1px rgba(0, 255, 255, 0.4);
+}
+
+/* font color and size adjustment to not look boring */
+.jobs .sidebar .job-card{
+  width: 80%;
+  display: inline-block;
+  border: 2px solid var(--color-theme);
+  padding: 0.6em;
+  margin-bottom: 1em;
+  border-radius: 7px;
+  background-color: rgba(0, 255, 255, 0.1);
+  opacity: 0.8;
+}
+.jobs .sidebar .job-card h3{
+  font-size: 1.2em;
+  margin-bottom: 0.4em;
+}
+.jobs .sidebar .job-card .company{
+  font-family: fantasy;
+  color: rgb(171, 171, 171);
+  font-size: 0.7em;
+  letter-spacing: 1px;
+}
+.jobs .sidebar .job-card .salary{
+  font-size: 0.7em;
+  color: var(--color-theme);
+  margin-bottom: 0.5em;
+}
+.jobs .sidebar .job-card .desc{
+  font-size: 0.8em;
+  color: rgba(226, 226, 226, 0.9);
+}
+/* sidebar left size of job page end here */
+
+/* detail part (right side) start here */
+.jobs .details{
+  background-color: rgba(141, 141, 141, 0.33);
+  float: right;
+  flex: 8;
+  border: 2px solid rgb(186, 186, 186);
+  border-radius: 7px;
+  margin: 1.5em 0.7em;
+  padding: 1em;
+  color: rgb(200, 200, 200);
+  align-self: flex-start;
+  height: auto;
+}
+.jobs .details .content ul,ol{
+  list-style-position: inside;
+  padding: 0;
+}
+.jobs .details .content li{
+  font-size: 1em;
+  color: rgba(226, 226, 226, 0.9);
+}
+.jobs .details article{
+  display: none;
+  position: relative;
+}
+.jobs .details .content .ref{
+  color: rgb(213, 157, 14);
+}
+.jobs .details .content h1{
+  font-size: 1.7em;
+  color: rgba(0, 209, 209, 0.826);
+}
+.jobs .details .content h2{
+  font-size: 1.4em;
+  margin-top: 0.5em;
+  color: rgb(96, 190, 159);
+}
+.jobs .details .content p{
+  font-size: 1em;
+  color: rgba(226, 226, 226, 0.9);
+}
+.jobs .details .content header p:nth-of-type(3){
+  color: rgba(0, 209, 209, 0.9);
+}
+.jobs .details .content header p:nth-of-type(4){
+  color: rgba(0, 209, 209, 0.9);
+}
+
+/* conneting radio input with content */
+.jobs input:nth-child(1):checked ~ .details article:nth-child(1),
+.jobs input:nth-child(2):checked ~ .details article:nth-child(2),
+.jobs input:nth-child(3):checked ~ .details article:nth-child(3),
+.jobs input:nth-child(4):checked ~ .details article:nth-child(4){
+  display: block;
+}
+
+/* selected effect */
+.jobs input:nth-child(2):checked ~ aside label:nth-of-type(1),
+.jobs input:nth-child(3):checked ~ aside label:nth-of-type(2),
+.jobs input:nth-child(4):checked ~ aside label:nth-of-type(3){
+  opacity: 1;
+  filter: drop-shadow(0 0 10px rgb(48, 181, 207));
+}
+.jobs aside label:nth-of-type(1):hover,
+.jobs aside label:nth-of-type(2):hover,
+.jobs aside label:nth-of-type(3):hover{
+  opacity: 1;
+  filter: drop-shadow(0 0 10px rgb(48, 181, 207));
+}
+
+/* back arrow for later responsiveness for phones */
+.jobs .backarrow{
+  display: none;
+  opacity: 0.8;
+}
+
+/* a placeholder text */
+#dummy-text{
+  line-height: 2em;
+  font-size: 1.1em;
+}
+/* detail part (right side) end here */
+/* jobpage styling end here */
+
+/* apply page styling start here */
+.apply_page{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.apply_page h1{ 
+  text-align: center;
+  -webkit-text-stroke: 1px rgba(0, 255, 255, 0.4);
+  margin: 0.5em 0;
+}
+.apply_page form{
+  padding: 2em;
+  width: min(800px, 80%);
+  border: 1px solid var(--color-theme);
+  border-radius: 1em;
+}
+
+/* all input field color and style change to match the website theme */
+.apply_page form input, select, textarea{
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid grey;
+  padding: 0.2em;
+}
+.apply_page form select option {
+  background-color: #0f1917;
+  color: white;
+}
+
+/* all form elements are set to flex so that no extra responsive needed */
+.apply_page form fieldset{
+  border: 1px solid yellow;
+  border-radius: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1em;
+  gap: 1em;
+  margin: 1em 0;
+}
+.apply_page form legend{
+  color: var(--color-theme);
+  border: 1px solid rgb(0, 128, 115);
+  padding: 0.3em;
+  border-radius: 1em;
+}
+
+.apply_page form fieldset > p {
+  flex: 1 1 calc(50% - 1rem);
+  display: flex;
+  flex-direction: column;
+}
+.apply_page form .personal_info .radio{
+  flex: 100%;
+}
+
+/* apply page styling end here */
+
+
+
+/* about page styling start here */
+/* page title */
+.member-info #team-section-heading{
+  text-align: center;
+  -webkit-text-stroke: 1px var(--color-theme);
+}
+.member-info #team-section-text{
+  width: 80%;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  margin-top: 1em;
+  border-bottom: 1px dashed yellow;
+}
+
+/* group detail section start */
+.about-page #web-team{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-page #group-info{
+  list-style: inside;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+}
+.about-page #group-info #group-info-content{
+  border-radius: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  width: min(1000px, 85%);
+}
+
+/* first and outer most list of nested list */
+.about-page #group-info #group-info-content > li{
+  flex: 1 1 calc(48% - 1rem);
+  border: 1px solid var(--color-theme);
+  border-radius: 1em;
+  list-style-type: "🌐";
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+/* second and middle list of nested list */
+.about-page #group-info #group-info-content > li > ul> li{
+  list-style-type: "✨";
+  padding-left: 1em;
+}
+.about-page #group-info #group-info-content #time-table{
+  flex: 100%;
+}
+.about-page #group-info #time-table > ul{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2em;
+  padding: 0.5em;
+}
+.about-page #group-info #time-table > ul > li{
+  padding: 0.5em;
+}
+
+/* third and innermost list of nested list */
+.about-page #group-info #time-table > ul > li > ul{
+  padding-left: 1em;
+  margin-left: 0;
+  list-style-type: "🕒";
+}
+/* group detail section end */
+
+/* group photo section start */
+.about-page #group-photo-section{
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid grey;
+  border-top: 1px solid grey;
+  align-items: center;
+  background-color: rgba(43, 78, 81, 0.3);
+  padding: 1em 0;
+}
+.about-page #group-photo-section figure{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.about-page #group-photo-section img{
+  width: 80%;
+  border-radius: 50%;
+}
+.about-page #group-photo-section #group-photo-text{
+  padding: 1.5em 7em;
+}
+.about-page #group-photo-section #group-photo-text p{
+  color: rgba(195, 195, 195, 0.9);
+}
+
+.about-page #group-photo-section #group-photo-heading{
+  color: var(--color-theme);
+} 
+.about-page #group-photo-section strong{
+  color: goldenrod;
+}
+/* group photo section end */
+
+/* each member profiles start */
+.about-page .member-info #member-profiles{
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+}
+.about-page .member-info #member-profiles #profiles-heading{
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+.about-page .member-info #member-profiles article{
+  width: 80%;
+  border: 1px solid var(--color-theme);
+  border-radius: 25px;
+  display: flex;
+  margin: 1em 0;
+  padding: 1em;
+}
+.about-page .member-info #member-profiles article .img{
+  flex:3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-page .member-info #member-profiles article img{
+  width: 190px;
+  height: 190px;
+  object-fit: cover;
+  border: 10px solid rgba(174, 174, 174, 0.4);
+  border-radius: 50%;
+}
+.about-page .member-info #member-profiles article .text{
+  flex: 7;
+}
+.about-page .member-info #member-profiles article .text h3{
+  color: var(--color-theme)
+}
+.about-page .member-info #member-profiles article .text dt{
+  font-family: fantasy;
+  color: rgba(255, 255, 255, 0.742);
+}
+.about-page .member-info #member-profiles article .text dd,blockquote,p{
+  color: rgba(255, 255, 255, 0.633);
+}
+.about-page .member-info #member-profiles article .text em{
+  color: goldenrod;
+}
+/* each member profiles end */
+
+/* fun facts table */
+/* table is made to be able to scroll seperately so as to not broke whole page viewport */
+#fun-facts {
+  padding: 60px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #e5e7eb;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+#fun-facts h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: cyan;
+  letter-spacing: 1px
+}
+#fun-facts #fun-facts-text {
+  max-width: 1000px;
+  margin: 20px auto;
+  background: #111827;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(34, 211, 238, 0.1);
+  overflow-x: auto;
+  width: 100%;
+}
+#fun-facts #fun-facts-text table {
+  width: 100%;
+  min-width: 900px; 
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+}
+#fun-facts #fun-facts-text caption {
+  caption-side: bottom;
+  font-size: 0.9rem;
+  color: #9ca3af;
+  margin-top: 15px;
+}
+#fun-facts #fun-facts-text thead {
+  background: linear-gradient(90deg, #06b6d4, #22d3ee);
+}
+#fun-facts #fun-facts-text thead th {
+  padding: 14px;
+  text-align: left;
+  color: #020617;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+#fun-facts #fun-facts-text tbody tr {
+  border-bottom: 1px solid rgba(34, 211, 238, 0.15);
+  transition: 0.3s ease;
+}
+#fun-facts #fun-facts-text tbody tr:hover {
+  background: rgba(34, 211, 238, 0.08);
+}
+#fun-facts #fun-facts-text tbody td,
+#fun-facts #fun-facts-text tbody th {
+  padding: 14px;
+  font-size: 0.9rem;
+}
+#fun-facts #fun-facts-text tbody th {
+  color: #22d3ee;
+  font-weight: 500;
+  white-space: nowrap;
+}
+#fun-facts #fun-facts-text tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+#fun-facts #fun-facts-text table thead tr th:first-child {
+  border-top-left-radius: 12px;
+}
+#fun-facts #fun-facts-text table thead tr th:last-child {
+  border-top-right-radius: 12px;
+}
+
+#join-us{
+  margin: 2em;
+  border: 5px solid rgba(147, 147, 147, 0.744);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 2em;
+}
+#join-us #join-img img{
+  width: 300px;
+  height: 200px;
+  border: 1px solid var(--color-theme);
+  border-radius: 15px;
+  margin-right: 2em;
+}
+#join-us #join-heading{
+  color: var(--color-theme);
+}
+/* about page styling end here */
+
+/* all responsive adjustment here*/
+/* mostly width adjustments, size adjustments and flex&grid box column adjustments */
+@media (max-width: 1050px){  
+  .about-page #group-info #time-table > ul{grid-template-columns: repeat(2, 1fr);}
+  .about-page .member-info #member-profiles article{
+    flex-direction: column;
+    gap: 2em;
+  }
+}
+@media (max-width: 830px){
+  .info{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .jobs .sidebar .job-card{width: 100%;}
+  .about-page #group-photo-section #group-photo-text{
+  padding: 1.5em 3em;
+}
+}
+@media (max-width: 670px) {
+  #join-us{
+    flex-direction: column;
+    gap: 2em;
+  }
+  #join-us #join-img img{
+    margin-right: 0;
+  }
+  figcaption{
+    margin: 1em 3em;
+  }
+  .banner .text .description{
+    width: 80%;
+    transform: translate(11%);
+  }
+}
+
+/* major adjustment 2 layer 1 for jobs and 1 for description for narrow screens */
+/* empty radio and arrow icon is used here */
+@media (max-width: 600px) {
+  .info{
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+  }
+  .about-page #group-info #time-table > ul{grid-template-columns: repeat(1, 1fr);}
+  .about-page #group-info #group-info-content > li{
+    flex: 100%;
+  }
+  .jobs{
+    min-height: 100vh;
+  }
+  .jobs .sidebar{
+    z-index: 1;
+  }
+  .jobs .sidebar .job-card{width: 98%;}
+  .jobs .details{
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    position: absolute;
+    z-index: 2;
+    padding-left: 1.5em;
+    margin: 0;
+    background-color: rgb(71, 71, 71);
+    overflow: hidden;
+  }
+  .jobs .backarrow{
+    display: block;
+    position: absolute;
+    transform: translateX(-100%);
+    padding: 2px 5px;
+  }
+  .jobs .backarrow:hover{
+    background-color: rgba(160, 156, 156, 0.775);
+    border-radius: 10px;
+  }
+  .jobs input:nth-child(1):checked ~ .details{
+    display: none;
+  }
+}
+@media (max-width: 530px){
+  #join-us #join-img img{
+  width: 220px;
+  height: 140px;
+  }
+  nav .logo{
+  flex: 1;
+  padding-right: 1em;
+  }
+  .info{
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+  }
+}
