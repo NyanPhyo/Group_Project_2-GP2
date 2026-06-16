@@ -3,6 +3,12 @@ $page = 'jobs';
 
 include 'settings.php';
 
+$conn = mysqli_connect($host, $user, $pwd, $sql_db);
+
+if (!$conn) {
+  die("Database connection failed: " . mysqli_connect_error());
+}
+
 $query = "SELECT * FROM jobs ORDER BY id ASC";
 $result = mysqli_query($conn, $query);
 
