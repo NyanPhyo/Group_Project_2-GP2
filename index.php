@@ -1,4 +1,5 @@
 <?php 
+session_start();
 $page = 'home';
 include 'header.inc';
 include 'nav.inc'; 
