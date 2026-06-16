@@ -44,7 +44,8 @@ body{
   flex-direction: column;
 }
 
-/* navigation for all pages bar start here*/
+/* navigation for all pages bar start here */
+
 /* logo and company name left side of navigation bar */
 nav{
   width: 100%;
@@ -102,6 +103,8 @@ nav .menu .buttons{
   width: 100%;
 }
 
+
+
 /* border buttom serve as indicator on which page you are in */
 nav .menu .buttons label{
   margin: 6px;
@@ -124,6 +127,38 @@ nav .menu .buttons label.active
   opacity: 1;
 }
 
+/* Logged-in manager badge */
+
+.nav-manager{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+
+    margin-left: 1.5em;
+    padding: 0.45em 1em;
+
+    border-radius: 999px;
+
+    border: 1px solid rgba(0,255,255,0.35);
+
+    background: rgba(0,255,255,0.08);
+
+    color: var(--color-theme);
+
+    font-size: 0.9em;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.nav-manager i{
+    font-size: 1.1em;
+    color: var(--color-theme);
+}
+
+.nav-manager-name{
+    letter-spacing: 0.03em;
+}
 /* navigation bar for all page end here*/
 
 /* main flex to fill the page to push footer to the bottom*/
@@ -224,6 +259,7 @@ footer .socials img {
   border: 1px solid rgb(195, 195, 195);
   border-radius: 1em;
 }
+
 .btn:hover{
   background-color: rgba(62, 237, 237);
   border: 1px solid rgb(221, 221, 221)
@@ -717,6 +753,91 @@ footer .socials img {
   color: var(--color-theme);
 }
 /* about page styling end here */
+
+/*  LOGIN PAGE */
+
+.login{
+    width: 400px;
+    margin: 5rem auto;
+    padding: 2rem;
+
+    background-color: rgba(255,255,255,0.05);
+
+    border: 1px solid var(--color-primary);
+
+    border-radius: 12px;
+
+    box-shadow: 0 0 20px rgba(0,255,255,0.15);
+}
+
+.login h1{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-group{
+    margin-bottom: 1.5rem;
+}
+
+.login label{
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.login input{
+    width: 100%;
+    padding: 0.8rem;
+
+    background-color: #111;
+
+    border: 1px solid var(--color-primary);
+
+    border-radius: 6px;
+
+    color: white;
+
+    font-size: 1rem;
+}
+
+.login input:focus{
+    outline: none;
+
+    border-color: white;
+
+    box-shadow: 0 0 10px var(--color-primary);
+}
+
+.login button{
+    width: 100%;
+
+    padding: 0.9rem;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background-color: var(--color-primary);
+
+    color: black;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.login button:hover{
+    transform: translateY(-2px);
+}
+.login-error{
+    text-align: center;
+
+    color: #ff6b6b;
+
+    margin-bottom: 1rem;
+}
+/* Login page end */
 
 /* all responsive adjustment here*/
 /* mostly width adjustments, size adjustments and flex&grid box column adjustments */

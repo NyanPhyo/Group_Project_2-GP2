@@ -1,4 +1,5 @@
 <?php 
+session_start();
 $page = 'apply';
 include 'header.inc';
 include 'nav.inc'; 
