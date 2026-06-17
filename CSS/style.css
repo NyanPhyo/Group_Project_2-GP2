@@ -32,6 +32,7 @@ description: styling for all 4 pages of group project
  /* Prevents the whole page from shaking/scrolling sideways */
 html, body {
   width: 100%;
+  min-height:100vh;
 }
 
  /* Ensures width: 100% actually means 100% */
@@ -85,7 +86,8 @@ nav .menu input{
   visibility: hidden;
   display: none;
 }
-nav .menu label a,i{
+nav .menu label a,
+nav .menu label i{
   color: var(--color-theme);
   font-size: 0.9em;
 }
@@ -102,7 +104,10 @@ nav .menu .buttons{
   display: flex;
   width: 100%;
 }
-
+nav .btn a,
+nav .btn a i{
+    color: rgb(49,49,49) !important;
+}
 
 
 /* border buttom serve as indicator on which page you are in */
@@ -158,6 +163,16 @@ nav .menu .buttons label.active
 
 .nav-manager-name{
     letter-spacing: 0.03em;
+}
+
+/* mobile navigation toggle */
+
+#nav-toggle{
+    display:none;
+}
+
+.nav-toggle-btn{
+    display:none;
 }
 /* navigation bar for all page end here*/
 
@@ -839,6 +854,93 @@ footer .socials img {
 }
 /* Login page end */
 
+/* MANAGE PAGE start here */
+
+.manage-page{
+width:95%;
+margin:2em auto;
+}
+
+.manage-page h1{
+text-align:center;
+margin-bottom:1.5em;
+}
+
+.manage-search,
+.delete-form{
+display:flex;
+flex-wrap:wrap;
+gap:1em;
+margin-bottom:1.5em;
+justify-content:center;
+}
+
+.manage-table select{
+    background-color: rgba(255,255,255,0.1);
+    color: var(--color-theme);
+
+    border: 1px solid var(--color-theme);
+    border-radius: 5px;
+
+    padding: 0.4em;
+}
+
+.manage-table select option{
+    background-color:#111;
+    color:var(--color-theme);
+}
+
+.manage-search input,
+.manage-search select,
+.delete-form input{
+padding:0.8em;
+min-width:180px;
+border:1px solid var(--color-theme);
+border-radius:5px;
+background:#111;
+color:white;
+
+}
+
+.manage-search button,
+.delete-form button,
+.manage-table button{
+padding:0.7em 1.2em;
+border:none;
+border-radius:5px;
+cursor:pointer;
+background:var(--color-theme);
+color:black;
+font-weight:bold;
+}
+
+.manage-table-wrapper{
+overflow-x:auto;
+}
+
+.manage-table{
+width:100%;
+border-collapse:collapse;
+}
+
+.manage-table th{
+background:var(--color-theme);
+color:black;
+}
+
+.manage-table th,
+.manage-table td{
+padding:0.8em;
+border:1px solid rgba(255,255,255,.15);
+text-align:center;
+}
+
+.manage-table tr:nth-child(even){
+background:rgba(255,255,255,.04);
+}
+
+
+
 /* all responsive adjustment here*/
 /* mostly width adjustments, size adjustments and flex&grid box column adjustments */
 @media (max-width: 1050px){  
@@ -847,6 +949,64 @@ footer .socials img {
     flex-direction: column;
     gap: 2em;
   }
+}
+@media screen and (max-width: 900px){
+
+    .nav-toggle-btn{
+      display:block;
+      font-size:1.8rem;
+      cursor:pointer;
+      color:var(--color-theme);
+      margin-left:auto;
+      padding-right:1rem;
+    }
+
+    nav{
+      flex-wrap:wrap;
+    }
+
+    nav .menu{
+      flex-basis:100%;
+      width:100%;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .3s ease;
+    }
+
+    #nav-toggle:checked ~ .menu{
+      max-height:600px;
+    }
+
+    nav .menu .buttons{
+      flex-direction:column;
+      align-items:center;
+      gap:0.5em;
+      margin-top:1em;
+    }
+
+    nav .menu .buttons label{
+        width:90%;
+        text-align:center;
+    }
+
+    .manage-search,
+    .delete-form{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .manage-search input,
+    .manage-search select,
+    .delete-form input,
+    .manage-search button,
+    .delete-form button{
+        width:100%;
+    }
+
+    .manage-table{
+        min-width:850px;
+    }
+
 }
 @media (max-width: 830px){
   .info{

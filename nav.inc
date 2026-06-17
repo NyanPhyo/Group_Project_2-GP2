@@ -14,7 +14,11 @@
         <?php endif; ?>
         </div>
         
-        
+        <input type="checkbox" id="nav-toggle">
+
+        <label for="nav-toggle" class="nav-toggle-btn">
+            <i class="fa-solid fa-bars"></i>
+        </label>
         <div class="menu">
             <div class="buttons">
                 <label class="<?= $page == 'home' ? 'active' : '' ?>">
