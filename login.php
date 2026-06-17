@@ -10,7 +10,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $conn = mysqli_connect($host,$user,$pwd,$sql_db);
 
-    $username = trim($_POST["username"]);
+    function sanitise_input($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+
+        return $data;
+    }
+
+    $username = sanitise_input($_POST["username"]);
     $password = $_POST["password"];
 
     $sql = "SELECT * FROM users WHERE username = ?";
@@ -20,6 +29,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     mysqli_stmt_execute($stmt);
 
     $result = mysqli_stmt_get_result($stmt);
+    if(!$conn)
+    {
+        die("Database connection failed.");
+    }
 
     if(mysqli_num_rows($result) == 1)
     {
