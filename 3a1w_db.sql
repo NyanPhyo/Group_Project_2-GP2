@@ -264,4 +264,21 @@ VALUES
 ('Project Timeline',
 'Week 6 — Finalise pages, testing, documentation');
 
+-- update member_profile
+UPDATE member_profiles
+SET individual_task = 'CSS design, responsive layout, user table and manage.php'
+WHERE name = 'Nyan Phyo Aung';
+
+UPDATE member_profiles
+SET individual_task = 'Job Description Page, job table'
+WHERE name = 'Wai Phyo Htet';
+
+UPDATE member_profiles
+SET individual_task = 'Job Application Page, eoi table, process_eoi.php'
+WHERE name = 'Aung Khant Zaw';
+
+UPDATE member_profiles
+SET individual_task = 'About Page, member_profiles table, team_fun_facts table, group_info table'
+WHERE name = 'Htoo Aung';
+
 
