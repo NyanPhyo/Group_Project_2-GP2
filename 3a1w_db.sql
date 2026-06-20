@@ -94,12 +94,48 @@ Basic knowledge of cybersecurity and incident response.'
 
 
 -- eoi table here
+CREATE TABLE eoi (
+    EOInumber INT AUTO_INCREMENT PRIMARY KEY,
+    ref_number VARCHAR(5) NOT NULL,
+    fname VARCHAR(20) NOT NULL,
+    lname VARCHAR(20) NOT NULL,
+    bday DATE NOT NULL,
+    gender ENUM('male','female','other') NOT NULL,
+    street VARCHAR(40) NOT NULL,
+    town VARCHAR(40) NOT NULL,
+    state ENUM('VIC','NSW','QLD','NT','WA','SA','TAS','ACT') NOT NULL,
+    postcode CHAR(4) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(12) NOT NULL,
+    skills VARCHAR(255),
+    otherskills TEXT,
+    status ENUM('New','Current','Final') NOT NULL DEFAULT 'New'
+);
+
+INSERT INTO eoi (ref_number, fname, lname, bday, gender, street, town, state, postcode, email, phone, skills, otherskills)
+VALUES 
+('A1B2C', 'Henry', 'Htoo', '1998-05-21', 'male', '12 Wattle Street', 'Hawthorn', 'VIC', '3122', 'henry.htoo@gmail.com', '0412345678', 'networking,python,linux', 'Familiar with Cisco Packet Tracer'),
+('X9Y8Z', 'Sarah', 'Tan', '2001-11-03', 'female', '45 Burwood Road', 'Camberwell', 'VIC', '3124', 'sarah.tan@gmail.com', '0498765432', 'cybersecurity,devops,cloud', 'Completed CompTIA Security+ certification');
+
+
+-- member contribution table here
 
 
 
+-- user table 
+-- password is hashed "Admin"
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
 
-
-
+INSERT INTO users(username,password)
+VALUES
+('Nyan Phyo Aung', '$2y$10$gUixbP4lMtWuSuUXdt6XiOJSPuT3X61BolUN3I78BOprXe4Lygzli'),
+('Htoo Aung Than Htaik', '$2y$10$gUixbP4lMtWuSuUXdt6XiOJSPuT3X61BolUN3I78BOprXe4Lygzli'),
+('Aung Khant Zaw', '$2y$10$gUixbP4lMtWuSuUXdt6XiOJSPuT3X61BolUN3I78BOprXe4Lygzli'),
+('Wai Phyo Htet', '$2y$10$gUixbP4lMtWuSuUXdt6XiOJSPuT3X61BolUN3I78BOprXe4Lygzli');
 
 -- member profile table here
 CREATE TABLE member_profiles (
@@ -280,5 +316,6 @@ WHERE name = 'Aung Khant Zaw';
 UPDATE member_profiles
 SET individual_task = 'About Page, member_profiles table, team_fun_facts table, group_info table'
 WHERE name = 'Htoo Aung';
+
 
 

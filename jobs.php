@@ -1,7 +1,15 @@
 <?php 
+session_start();
 $page = 'jobs';
 
-include 'settings.php';
+include 'header.inc';
+include 'nav.inc'; 
+require_once 'settings.php';
+$conn = mysqli_connect($host, $user, $pwd, $sql_db);
+
+if (!$conn) {
+  die("Database connection failed: " . mysqli_connect_error());
+}
 
 $query = "SELECT * FROM jobs ORDER BY id ASC";
 $result = mysqli_query($conn, $query);
@@ -29,13 +37,6 @@ function renderListItems($text) {
     }
   }
 }
-
-
-
-
-
-include 'header.inc';
-include 'nav.inc'; 
 ?>
 
 <main>
