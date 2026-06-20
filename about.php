@@ -1,8 +1,10 @@
-<?php 
+<?php
 session_start();
 $page = 'about';
+
+include 'settings.php';
 include 'header.inc';
-include 'nav.inc'; 
+include 'nav.inc';
 ?>
  
     <!--main contain main contents of the web page-->
@@ -16,6 +18,19 @@ include 'nav.inc';
         </p>
 
         <!-- ── GROUP INFO (nested list) ── -->
+        <?php
+
+        $query = "SELECT * FROM group_info ORDER BY category";
+        $result = mysqli_query($conn, $query);
+
+        $groupData = [];
+
+        while($row = mysqli_fetch_assoc($result))
+        {
+            $groupData[$row['category']][] = $row['description'];
+        }
+
+        ?>
         <section id="group-info" aria-labelledby="group-info-heading">
           <h2 id="group-info-heading">Group Details</h2>
           <ul id="group-info-content">
@@ -63,42 +78,60 @@ include 'nav.inc';
 
               <!--in person meating schedule-->
               <li>
-                <strong>In-Person Meetings:</strong>
-                <ul>
-                  <li>Tuesday — 4:30 PM – 5:30 PM</li>
-                  <li>Wednesday — 1:00 PM – 2:00 PM</li>
-                </ul>
+                  <strong>In-Person Meetings:</strong>
+
+                  <ul>
+                      <?php
+                      foreach($groupData['In-Person Meetings'] as $item)
+                      {
+                          echo "<li>$item</li>";
+                      }
+                      ?>
+                  </ul>
               </li>
 
               <!--communication channel-->
               <li>
-                <strong>Communication Channels:</strong>
-                <ul>
-                  <li>WhatsApp Group — Daily or as needed</li>
-                  <li>Zoom Online Discussion — Saturdays 8:00 PM – 9:15 PM</li>
-                  <li>In-Person — During and after class lectures</li>
-                </ul>
+                  <strong>Communication Channels:</strong>
+
+                  <ul>
+                      <?php
+                      foreach($groupData['Communication Channels'] as $item)
+                      {
+                          echo "<li>$item</li>";
+                      }
+                      ?>
+                  </ul>
               </li>
 
               <!--communication response expectation-->
               <li>
-                <strong>Response Expectations:</strong>
-                <ul>
-                  <li>Messages replied within 12 hours</li>
-                  <li>Members attend online discussions before 8:30 PM</li>
-                  <li>Inform team in advance if unavailable</li>
-                </ul>
+                  <strong>Response Expectations:</strong>
+
+                  <ul>
+                      <?php
+                      foreach($groupData['Response Expectations'] as $item)
+                      {
+                          echo "<li>$item</li>";
+                      }
+                      ?>
+                  </ul>
               </li>
 
               <!--project timeline-->
               <li>
-                <strong>Project Timeline:</strong>
-                <ul>
-                  <li>Week 4 — Discussion, task division, Jira planning, start Home page</li>
-                  <li>Week 5 — Finish Home page; start remaining pages and CSS</li>
-                  <li>Week 6 — Finalise pages, testing, documentation</li>
-                </ul>
+                  <strong>Project Timeline:</strong>
+
+                  <ul>
+                      <?php
+                      foreach($groupData['Project Timeline'] as $item)
+                      {
+                          echo "<li>$item</li>";
+                      }
+                      ?>
+                  </ul>
               </li>
+
           </ul>
         </section>
 
@@ -134,210 +167,157 @@ include 'nav.inc';
 
         <!-- ── MEMBER PROFILES (definition list with quotes &amp; languages) ── -->
         <section id="member-profiles" aria-labelledby="profiles-heading">
-          <h2 id="profiles-heading">Member Contributions & Quotes</h2>
+            <h2 id="profiles-heading">Member Contributions & Quotes</h2>
 
-          <!-- Member 1 -->
-          <article id="member-nyan" aria-labelledby="nyan-heading">
-            <div class="img">
-              <img
-                src="resources/images/NPA.jpeg"
-                alt="Portrait photo of Nyan Phyo Aung"
-                
-              />
-            </div>
-            <div class="text">
-              <h3 id="nyan-heading">1. Nyan Phyo Aung</h3>
-              <dl>
-                <dt>Individual Task</dt>
-                <dd>CSS &mdash; Responsible for all stylesheet design, visual layout, typography, colour themes, and responsive behaviour across the entire website.</dd>
+            <?php
+            $query = "SELECT * FROM member_profiles";
+            $result = mysqli_query($conn, $query);
 
-                <dt>Shared Task</dt>
-                <dd>Home Page &mdash; Co-developed the landing page structure, hero section, and introductory content with Wai Phyo Htet.</dd>
+            $count = 1;
 
-                <dt>Personal Quote</dt>
-                <dd>
-                  <blockquote>
-                    "Good CSS is invisible — you only notice it when it's missing."
-                  </blockquote>
-                  <p>
-                    <strong>Favourite Language:</strong>Chinese --- <em>Name in Chinese: "CSS爱好者"</em>
-                  </p>
-                </dd>
+            while($row = mysqli_fetch_assoc($result))
+            {
+            ?>
+                <article id="member-<?php echo $row['member_id']; ?>">
+                    <div class="img">
+                        <img
+                            src="<?php echo $row['image']; ?>"
+                            alt="Portrait photo of <?php echo $row['name']; ?>"
+                        />
+                    </div>
 
-                <dt>First Programming Language Learned</dt>
-                <dd>HTML &mdash; <em>"HTML是我学的第一门编程语言"</em> Translation: HTML was the first language I ever learned.</dd>
-              </dl>
-            </div>
-          </article>
+                    <div class="text">
+                        <h3><?php echo $count . ". " . $row['name']; ?></h3>
 
-          <!-- Member 2 -->
-          <article id="member-wai" aria-labelledby="wai-heading">
-            <div class="img">
-              <img
-                src="resources/images/WPH.jpeg"
-                alt="Portrait photo of Wai Phyo Htet"
-                
-              />
-            </div>
-            <div class="text">
-              <h3 id="wai-heading">2. Wai Phyo Htet</h3>
-              <dl>
-                <dt>Individual Task</dt>
-                <dd>Job Description Page &mdash; Designed and built the page listing all available roles at CyberNex Technologies, including role summaries, requirements, and application links.</dd>
+                        <dl>
+                            <dt>Individual Task</dt>
+                            <dd><?php echo $row['individual_task']; ?></dd>
 
-                <dt>Shared Task</dt>
-                <dd>Home Page &mdash; Co-developed the landing page navigation, company overview section, and call-to-action elements with Nyan Phyo Aung.</dd>
+                            <dt>Shared Task</dt>
+                            <dd><?php echo $row['shared_task']; ?></dd>
 
-                <dt>Personal Quote</dt>
-                <dd>
-                  <blockquote>
-                    "A clear job description is the first line of code in building a great team."
-                  </blockquote>
-                  <p>
-                    <strong>Favourite Language:</strong> Burmese (မြန်မာဘာသာ) --- <em>Name in Burmese: "ပိုင်သွန်ချစ်သူ"</em>
-                  </p>
-                </dd>
+                            <dt>Personal Quote</dt>
+                            <dd>
+                                <blockquote>
+                                    "<?php echo $row['personal_quote']; ?>"
+                                </blockquote>
 
-                <dt>First Programming Language Learned</dt>
-                <dd>Python &mdash; <em>"Python သည် ကျွန်တော် ပထမဆုံး ကုဒ်ရေးသားခဲ့သော ဘာသာစကားဖြစ်သည်။"</em> Translation: Python was the first language I coded in.</dd>
-              </dl>
-            </div>
-          </article>
+                                <p>
+                                    <strong>Favourite Language:</strong>
+                                    <?php echo $row['favourite_language']; ?>
+                                    —
+                                    <em><?php echo $row['nickname']; ?></em>
+                                </p>
+                            </dd>
 
-          <!-- Member 3 -->
-          <article id="member-aung-khant" aria-labelledby="khant-heading">
-            <div class="img">
-              <img
-                src="resources/images/AKZ.jpeg"
-                alt="Portrait photo of Aung Khant Zaw"
-                
-              
-              />
-            </div>
-            <div class="text">
-              <h3 id="khant-heading">3. Aung Khant Zaw</h3>
-              <dl>
-                <dt>Individual Task</dt>
-                <dd>Job Application Page &mdash; Built the interactive application form allowing candidates to submit their details, upload CVs, and apply for positions at CyberNex Technologies.</dd>
-
-                <dt>Shared Task</dt>
-                <dd>Jira Management &mdash; handles implementation and documentation: linking the Jira project in the index.html footer, ensuring tutor access, and reviewing that all requirements and submissions are complete.</dd>
-
-                <dt>Personal Quote</dt>
-                <dd>
-                  <blockquote>
-                    "Organised tasks lead to organised code — Jira keeps us honest."
-                  </blockquote>
-                  <p>
-                    <strong>Favourite Language:</strong> Burmese (မြန်မာဘာသာ) --- <em>Name in Burmese: "ကြေကွဲလူငယ်"</em>
-                  </p>
-                </dd>
-
-                <dt>First Programming Language Learned</dt>
-                <dd>JavaScript &mdash; <em> JavaScript က ဝက်ဘ်ဖွံ့ဖြိုးရေးကို ချစ်လာစေတဲ့ ဘာသာစကားပါ။</em> Translation: JavaScript is the language that made me fall in love with web development.</dd>
-              </dl>
-            </div>
-          </article>
-
-          <!-- Member 4 -->
-          <article id="member-htoo" aria-labelledby="htoo-heading">
-            <div class="img">
-              <img
-                src="resources/images/HA.jpeg"
-                alt="Portrait photo of Htoo Aung"
-                
-              />
-            </div>
-            <div class="text">
-              <h3 id="htoo-heading">4. Htoo Aung</h3>
-              <dl>
-                <dt>Individual Task</dt>
-                <dd>About Page &mdash; Authored and structured the complete About page (this page!) including team profiles, fun facts, company narrative, and all required semantic HTML elements.</dd>
-
-                <dt>Shared Task</dt>
-                <dd>Jira Management &mdash; focuses on creating the Jira project: defining epics, writing detailed user stories with priorities, assigning tasks, and organizing at least two sprints.</dd>
-
-                <dt>Personal Quote</dt>
-                <dd>
-                  <blockquote>
-                    "A great About page tells a story — not just a list of names."
-                  </blockquote>
-                  <p>
-                    <strong>Favourite Language:</strong> Japanese --- <em>Name in Japanese: "五条"</em>
-                  </p>
-                </dd>
-
-                <dt>First Programming Language Learned</dt>
-                <dd>C++ &mdash; <em>C++は、プログラミングのしっかりとした基礎を教えてくれた言語です。</em> Translation: C++ is the language that taught me the solid fundamentals of programming.</dd>
-              </dl>
-            </div>
-          </article>
+                            <dt>First Programming Language Learned</dt>
+                            <dd>
+                                <?php echo $row['first_language']; ?>
+                                —
+                                <?php echo $row['first_language_desc']; ?>
+                            </dd>
+                        </dl>
+                    </div>
+                </article>
+            <?php
+                $count++;
+            }
+            ?>
         </section>
 
         <!-- ── FUN FACTS TABLE ── -->
+        <?php
+
+        $query = "SELECT * FROM team_fun_facts";
+        $result = mysqli_query($conn, $query);
+
+        $members = array();
+
+        while($row = mysqli_fetch_assoc($result))
+        {
+            $members[] = $row;
+        }
+
+        ?>
         <section id="fun-facts" aria-labelledby="fun-facts-heading">
           <h2 id="fun-facts-heading">Team Fun Facts</h2>
           <div id="fun-facts-text">
-            <table>
+          <table>
+
               <caption>
-                Fun facts about the Three Aung One Wai team members — including dream jobs,
-                favourite coding snacks, hometowns, spirit animals, and hidden talents.
+                  Fun facts about the Three Aung One Wai team members
               </caption>
+
               <thead>
-                <tr>
-                  <th scope="col"> </th>
-                  <th scope="col">Nyan Phyo Aung</th>
-                  <th scope="col">Wai Phyo Htet</th>
-                  <th scope="col">Aung Khant Zaw</th>
-                  <th scope="col">Htoo Aung</th>
-                </tr>
+                  <tr>
+                      <th></th>
+
+                      <?php foreach($members as $member){ ?>
+                          <th><?php echo $member['member_name']; ?></th>
+                      <?php } ?>
+
+                  </tr>
               </thead>
+
               <tbody>
-                <tr>
-                  <th scope="row">Dream Job</th>
-                  <td>UX/UI Designer at a top tech firm</td>
-                  <td>HR Tech Lead at a global company</td>
-                  <td>Product Manager at a startup</td>
-                  <td>Cybersecurity Analyst</td>
-                </tr>
-                <tr>
-                  <th scope="row">Coding Snack</th>
-                  <td>Prawn crackers &amp; green tea</td>
-                  <td>Instant noodles (at midnight)</td>
-                  <td>Banana chips &amp; iced coffee</td>
-                  <td>Dark chocolate &amp; milk tea</td>
-                </tr>
-                <tr>
-                  <th scope="row">Hometown</th>
-                  <td>Khayan, Myanmar</td>
-                  <td>Mandalay, Myanmar</td>
-                  <td>Hinthada, Myanmar</td>
-                  <td>Yangon, Myanmar</td>
-                </tr>
-                <tr>
-                  <th scope="row">Spirit Animal</th>
-                  <td>Owl (detail-oriented, night owl)</td>
-                  <td>Bee (organised, hard-working)</td>
-                  <td>Ant (team player, planner)</td>
-                  <td>Fox (curious, resourceful)</td>
-                </tr>
-                <tr>
-                  <th scope="row">Hidden Talent</th>
-                  <td>Sketching character illustrations</td>
-                  <td>Playing acoustic guitar</td>
-                  <td>Speed-solving Rubik's cubes</td>
-                  <td>Writing short mystery stories</td>
-                </tr>
-                <tr>
-                  <th scope="row">Hours of Sleep (on deadline night)</th>
-                  <td>5 hours (5 energy drinks)</td>
-                  <td>6 hours (2 energy drinks)</td>
-                  <td>4 hours (3 coffee)</td>
-                  <td>2 hours (optional)</td>
-                </tr>
-                
+
+                  <tr>
+                      <th>Dream Job</th>
+
+                      <?php foreach($members as $member){ ?>
+                          <td><?php echo $member['dream_job']; ?></td>
+                      <?php } ?>
+
+                  </tr>
+
+                  <tr>
+                      <th>Coding Snack</th>
+
+                      <?php foreach($members as $member){ ?>
+                          <td><?php echo $member['coding_snack']; ?></td>
+                      <?php } ?>
+
+                  </tr>
+
+                  <tr>
+                      <th>Hometown</th>
+
+                      <?php foreach($members as $member){ ?>
+                          <td><?php echo $member['hometown']; ?></td>
+                      <?php } ?>
+
+                  </tr>
+
+                  <tr>
+                      <th>Spirit Animal</th>
+
+                      <?php foreach($members as $member){ ?>
+                          <td><?php echo $member['spirit_animal']; ?></td>
+                      <?php } ?>
+
+                  </tr>
+
+                  <tr>
+                      <th>Hidden Talent</th>
+
+                      <?php foreach($members as $member){ ?>
+                          <td><?php echo $member['hidden_talent']; ?></td>
+                      <?php } ?>
+
+                  </tr>
+
+                  <tr>
+                      <th>Hours of Sleep (on deadline night)</th>
+
+                      <?php foreach($members as $member){ ?>
+                          <td><?php echo $member['sleep_hours']; ?></td>
+                      <?php } ?>
+
+                  </tr>
+
               </tbody>
-            </table>
+
+          </table>
           </div>
         </section>
 
@@ -373,8 +353,3 @@ include 'nav.inc';
     </main>
    
 <?php include 'footer.inc'; ?>
-
- 
-
-
-
