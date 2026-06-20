@@ -54,6 +54,10 @@ $otherskills = cleanInput($_POST['otherskills'] ?? '');
 
 
 $errors = [];
+$validRefs = ['CS202', 'PT206', 'DF296'];
+if (!in_array($ref, $validRefs)) {
+    $errors[] = 'Job Reference Number is not valid.';
+}
 
 if (!preg_match('/^[A-Za-z0-9]{5}$/', $ref)) {
     $errors[] = 'Job Reference Number must be exactly 5 letters/numbers.';
