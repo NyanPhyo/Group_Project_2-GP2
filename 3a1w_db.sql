@@ -3,7 +3,7 @@ USE 3a1w_db;
 -- Database name : '3a1w_db'
 
 -- job table here
-CREATE TABLE jobs (
+CREATE TABLE IF NOT EXISTS jobs (
   id INT AUTO_INCREMENT PRIMARY KEY,
   reference_number VARCHAR(20) NOT NULL,
   title VARCHAR(100) NOT NULL,
@@ -94,7 +94,7 @@ Basic knowledge of cybersecurity and incident response.'
 
 
 -- eoi table here
-CREATE TABLE eoi (
+CREATE TABLE IF NOT EXISTS eoi (
     EOInumber INT AUTO_INCREMENT PRIMARY KEY,
     ref_number VARCHAR(5) NOT NULL,
     fname VARCHAR(20) NOT NULL,
@@ -124,7 +124,7 @@ VALUES
 
 -- user table 
 -- password is hashed "Admin"
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
@@ -138,7 +138,7 @@ VALUES
 ('Wai Phyo Htet', '$2y$10$gUixbP4lMtWuSuUXdt6XiOJSPuT3X61BolUN3I78BOprXe4Lygzli');
 
 -- member profile table here
-CREATE TABLE member_profiles (
+CREATE TABLE IF NOT EXISTS member_profiles (
     member_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     image VARCHAR(255) NOT NULL,
@@ -207,7 +207,7 @@ VALUES
 
 
 -- team fun facts table
-CREATE TABLE team_fun_facts (
+CREATE TABLE IF NOT EXISTS team_fun_facts (
     member_id INT AUTO_INCREMENT PRIMARY KEY,
     member_name VARCHAR(100) NOT NULL,
     dream_job VARCHAR(255),
@@ -257,7 +257,7 @@ VALUES
 '2 hours (optional)');
 
 -- group info table 
-CREATE TABLE group_info (
+CREATE TABLE IF NOT EXISTS group_info (
     info_id INT AUTO_INCREMENT PRIMARY KEY,
     category VARCHAR(100) NOT NULL,
     description TEXT NOT NULL

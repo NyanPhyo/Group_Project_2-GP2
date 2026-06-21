@@ -4,7 +4,7 @@ $page = 'apply';
 include 'settings.php';
 include 'header.inc';
 include 'nav.inc'; 
-
+$conn = mysqli_connect($host,$user,$pwd,$sql_db);
 $prefillRef = '';
 
 if (isset($_GET['job_id']) && ctype_digit($_GET['job_id'])) {

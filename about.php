@@ -5,6 +5,7 @@ $page = 'about';
 include 'settings.php';
 include 'header.inc';
 include 'nav.inc';
+$conn = mysqli_connect($host,$user,$pwd,$sql_db);
 ?>
  
     <!--main contain main contents of the web page-->
@@ -344,8 +345,8 @@ include 'nav.inc';
             development, and the chance to work on problems that genuinely matter.
           </p>
           <p>
-            <a class="btn" href="jobs.html">Browse Open Roles</a>
-            <a class="btn" href="apply.html">Submit an Application</a>
+            <a class="btn" href="jobs.php">Browse Open Roles</a>
+            <a class="btn" href="apply.php">Submit an Application</a>
           </p>
         </div>
       </section>
