@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['ref'], $_POST['fname
 }
 
 include 'settings.php';
-
+$conn = mysqli_connect($host,$user,$pwd,$sql_db);
 
 
 $createTable = "CREATE TABLE IF NOT EXISTS eoi (
