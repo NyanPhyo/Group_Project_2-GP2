@@ -54,6 +54,15 @@ $otherskills = cleanInput($_POST['otherskills'] ?? '');
 
 
 $errors = [];
+$refCheckStmt = mysqli_prepare($conn, "SELECT id FROM jobs WHERE reference_number = ?");
+mysqli_stmt_bind_param($refCheckStmt, 's', $ref);
+mysqli_stmt_execute($refCheckStmt);
+mysqli_stmt_store_result($refCheckStmt);
+
+if (mysqli_stmt_num_rows($refCheckStmt) === 0) {
+    $errors[] = 'Job Reference Number does not match any open position.';
+}
+mysqli_stmt_close($refCheckStmt);
 
 if (!preg_match('/^[A-Za-z0-9]{5}$/', $ref)) {
     $errors[] = 'Job Reference Number must be exactly 5 letters/numbers.';

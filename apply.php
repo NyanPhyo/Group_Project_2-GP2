@@ -1,8 +1,23 @@
 <?php 
 session_start();
 $page = 'apply';
+include 'settings.php';
 include 'header.inc';
 include 'nav.inc'; 
+
+$prefillRef = '';
+
+if (isset($_GET['job_id']) && ctype_digit($_GET['job_id'])) {
+    $jobId = (int) $_GET['job_id'];
+    $stmt = mysqli_prepare($conn, "SELECT reference_number FROM jobs WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, 'i', $jobId);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
+    if ($row = mysqli_fetch_assoc($res)) {
+        $prefillRef = $row['reference_number'];
+    }
+    mysqli_stmt_close($stmt);
+}
 ?> 
      
     <main class="apply_page">
@@ -12,7 +27,8 @@ include 'nav.inc';
             <h2>Job Application  Form</h2>
             <p>
                 <label for="ref">Job Reference Number</label>
-                <input type="text" name="ref" id="ref" placeholder="Eg.A1B2C">
+                <input type="text" name="ref" id="ref" placeholder="Eg.CS202"
+                       value="<?php echo htmlspecialchars($prefillRef, ENT_QUOTES, 'UTF-8'); ?>">
             </p>
 
             <fieldset class="personal_info">
@@ -84,7 +100,7 @@ include 'nav.inc';
                 <legend>Technical Skills</legend>
                 <p>Select Your Relevant Skills</p>
                 <p>
-                    <label><input type="checkbox" name="skills[]" value="networking" checked>Networking</label>
+                    <label><input type="checkbox" name="skills[]" value="networking" >Networking</label>
                     <label><input type="checkbox" name="skills[]" value="cybersecurity">Cybersecurity</label>
                     <label><input type="checkbox" name="skills[]" value="python">Python</label>
                     <label><input type="checkbox" name="skills[]" value="pen_testing">Penetration Testing</label>
